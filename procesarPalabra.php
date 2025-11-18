@@ -29,5 +29,14 @@ if($_REQUEST['POST'] == "POST"){
 }
 
 function buscarPalabra(string $cadena, array $mapa_palabras):string{
-    
+    $contenido = strtolower($cadena);
+    foreach ($mapa_palabras as $categoria => $palabra) {
+        foreach($palabra as $pal){
+            if(str_contains($contenido,$pal)){
+                return $categoria;
+            }
+        }
+    }
+
+    return "sin categoria";
 }
