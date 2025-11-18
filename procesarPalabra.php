@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json');
 
 $mapa_categorias = [
     // --- Categorías principales que ya tenías ---
@@ -20,12 +21,20 @@ $mapa_categorias = [
     "MASCOTAS" => ["mascota", "perro", "gato", "veterinario", "comida para animales", "paseo", "baño"]
 ];
 
-if($_REQUEST['POST'] == "POST"){
+
+$listaNotas=file_get_contents("categoria.txt");
+
+if($_SERVER['REQUEST_METHOD'] == "POST"){
     if(isset($_POST['titulo']) && isset($_POST['contenido'])){
         $titulo = $_POST['titulo'];
         $contenido = $_POST['contenido'];
         $categoria = buscarPalabra($contenido,$mapa_categorias);
+
+        //array_push($listaNotas,["titulo"=>$titulo,"contenido"=>$contenido,"categoria"=>$categoria]);
+        file_put_contents('mi_archivo.txt', ["titulo"=>$titulo,"contenido"=>$contenido,"categoria"=>$categoria], FILE_APPEND);
     }
+}else if($_SERVER['REQUEST_METHOD'] == "GET"){
+    return json_encode($listaNotas);
 }
 
 function buscarPalabra(string $cadena, array $mapa_palabras):string{
