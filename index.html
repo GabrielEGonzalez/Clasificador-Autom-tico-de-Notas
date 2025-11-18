@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="procesarPalabra.php" method="post">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo">
+        <label for="contenido">Contenido:</label>
+        <textarea name="contenido" id="contenido"></textarea>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <div id="conte">
+
+    </div>
+
+    <script>
+        let conte = document.getElementById('conte');
+        fetch('procesarPalabra.php')
+            .then(response => response.json())
+            .then(data => {
+                conte.innerHTML = JSON.stringify(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>
