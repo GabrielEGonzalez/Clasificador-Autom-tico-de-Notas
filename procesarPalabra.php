@@ -31,12 +31,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $categoria = buscarPalabra($contenido,$mapa_categorias);
 
         //array_push($listaNotas,["titulo"=>$titulo,"contenido"=>$contenido,"categoria"=>$categoria]);
+        $listaNotasJSON = json_decode($listaNotas,true);
+        $listaN = isset($listaNotasJSON)?$listaNotasJSON:[];
         $datos = ["titulo"=>$titulo,"contenido"=>$contenido,"categoria"=>$categoria];
-        $datosJSON = json_encode($datos,JSON_PRETTY_PRINT);
+        $listaN[] = $datos;
+        $datosJSON = json_encode($listaN,JSON_PRETTY_PRINT);
         file_put_contents("notas.json", $datosJSON);
     }
 }else if($_SERVER['REQUEST_METHOD'] == "GET"){
-    return json_encode($listaNotas);
+    echo json_encode($listaNotas);
 }
 
 
