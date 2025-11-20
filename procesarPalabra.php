@@ -22,7 +22,7 @@ $mapa_categorias = [
 ];
 
 
-$listaNotas=file_get_contents("categoria.txt");
+$listaNotas=file_get_contents("notas.json");
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     if(isset($_POST['titulo']) && isset($_POST['contenido'])){
@@ -31,11 +31,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $categoria = buscarPalabra($contenido,$mapa_categorias);
 
         //array_push($listaNotas,["titulo"=>$titulo,"contenido"=>$contenido,"categoria"=>$categoria]);
-        file_put_contents('mi_archivo.txt', ["titulo"=>$titulo,"contenido"=>$contenido,"categoria"=>$categoria], FILE_APPEND);
+        $datos = ["titulo"=>$titulo,"contenido"=>$contenido,"categoria"=>$categoria];
+        $datosJSON = json_encode($datos,JSON_PRETTY_PRINT);
+        file_put_contents("notas.json", $datosJSON);
     }
 }else if($_SERVER['REQUEST_METHOD'] == "GET"){
     return json_encode($listaNotas);
 }
+
+
+function escribirJSON(){
+    
+}
+
 
 function buscarPalabra(string $cadena, array $mapa_palabras):string{
     $contenido = strtolower($cadena);
