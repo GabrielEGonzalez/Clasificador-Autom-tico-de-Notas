@@ -3,30 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Publicación de Contenido</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <form action="procesarPalabra.php" method="post">
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo">
-        <label for="contenido">Contenido:</label>
-        <textarea name="contenido" id="contenido"></textarea>
-        <input type="submit" value="Enviar">
-    </form>
+    <header>
+        <h1>✍️ Sistema de Entrada de Datos</h1>
+    </header>
 
-    <div id="conte">
+    <main>
+        <section class="formulario-seccion">
+            <h2>Crear Nueva Entrada</h2>
+            <form action="procesarPalabra.php" method="post">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required placeholder="Título de la entrada">
 
-    </div>
+                <label for="contenido">Contenido:</label>
+                <textarea name="contenido" id="contenido" required placeholder="Escribe el cuerpo del texto aquí..."></textarea>
+
+                <input type="submit" value="Enviar">
+            </form>
+        </section>
+
+        <hr> <section id="resultados">
+            <h2>📊 Datos Recibidos (Mediante Fetch)</h2>
+            <p>Estos datos se cargaron directamente desde 'procesarPalabra.php' al cargar la página:</p>
+            <div id="conte">
+                Cargando datos...
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><small>&copy; 2025 Aplicación Web Simple.</small></p>
+    </footer>
 
     <script>
         let conte = document.getElementById('conte');
+        // El script se mantiene igual, aunque podrías añadir un indicador de carga
         fetch('procesarPalabra.php')
-            .then(response => response.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Error HTTP: ${res.status}`);
+                }
+                return res.json();
+            })
             .then(data => {
-                conte.innerHTML = JSON.stringify(data);
+                console.log(data);
+                // Mostrar datos de manera más legible si es un array de objetos
+                if (Array.isArray(data)) {
+                    conte.innerHTML = data.map(item => `<div>Título: ${item.titulo || 'N/A'}, Contenido: ${item.contenido || 'N/A'}</div>`).join('');
+                } else {
+                    conte.innerHTML = JSON.stringify(data, null, 2); // Formato JSON legible
+                }
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error('Error al cargar los datos:', error);
+                conte.innerHTML = `<p style="color: red;">No se pudieron cargar los datos. Verifique 'procesarPalabra.php'.</p>`;
             });
     </script>
 </body>
