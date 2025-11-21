@@ -22,29 +22,42 @@ $mapa_categorias = [
 ];
 
 
-$listaNotas=file_get_contents("notas.json");
-
-if($_SERVER['REQUEST_METHOD'] == "POST"){
-    if(isset($_POST['titulo']) && isset($_POST['contenido'])){
-        $titulo = $_POST['titulo'];
-        $contenido = $_POST['contenido'];
-        $categoria = buscarPalabra($contenido,$mapa_categorias);
-
-        //array_push($listaNotas,["titulo"=>$titulo,"contenido"=>$contenido,"categoria"=>$categoria]);
-        $listaNotasJSON = json_decode($listaNotas,true);
-        $listaN = isset($listaNotasJSON)?$listaNotasJSON:[];
-        $datos = ["titulo"=>$titulo,"contenido"=>$contenido,"categoria"=>$categoria];
-        $listaN[] = $datos;
-        $datosJSON = json_encode($listaN,JSON_PRETTY_PRINT);
-        file_put_contents("notas.json", $datosJSON);
-    }
-}else if($_SERVER['REQUEST_METHOD'] == "GET"){
-    echo json_encode($listaNotas);
+$listaNotas = file_get_contents("notas.json");
+$listaNotasJSON = json_decode($listaNotas, true);
+if(!$listaNotasJSON){
+    $listaNotasJSON = [];
 }
 
+if($_SERVER['REQUEST_METHOD'] == "POST"){
 
-function escribirJSON(){
-    
+    if(isset($_POST['titulo']) && isset($_POST['contenido'])){
+
+        $titulo = $_POST['titulo'];
+        $contenido = $_POST['contenido'];
+        $categoria = buscarPalabra($contenido, $mapa_categorias);
+
+        $nuevaNota = [
+            "titulo" => $titulo,
+            "contenido" => $contenido,
+            "categoria" => $categoria
+        ];
+
+        // añadir a lista
+        $listaNotasJSON[] = $nuevaNota;
+
+        // guardar en archivo
+        file_put_contents("notas.json", json_encode($listaNotasJSON, JSON_PRETTY_PRINT));
+
+        echo json_encode([
+            "message" => "Tus datos han sido guardados correctamente.",
+            "datos" => $listaNotasJSON
+        ]);
+    }
+
+} else if($_SERVER['REQUEST_METHOD'] == "GET") {
+
+    echo json_encode($listaNotasJSON);
+
 }
 
 
