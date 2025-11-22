@@ -1,0 +1,140 @@
+/* -------------------------
+   BASE DARK MINIMALISTA
+------------------------- */
+body {
+    background: #1e1f22;
+    color: #e7e7e7;
+    padding: 40px 0;
+    font-family: "Inter", sans-serif;
+}
+
+/* -------------------------
+   HEADER
+------------------------- */
+header h1 {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* -------------------------
+   FORMULARIO
+------------------------- */
+.formulario-seccion {
+    background: #2a2c30;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+label {
+    color: #cfcfcf;
+}
+
+input[type="text"],
+textarea {
+    background: #1f2023;
+    color: #eee;
+    border: 1px solid #3b3c3f;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #5aa2ff;
+    box-shadow: 0 0 0 2px rgba(90,162,255,0.3);
+}
+
+input[type="submit"] {
+    background: #5aa2ff;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+input[type="submit"]:hover {
+    background: #4a8fe0;
+}
+
+/* -------------------------
+   RESULTADOS
+------------------------- */
+#resultados {
+    background: #2a2c30;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+#conte {
+    background: none;
+    border: none;
+}
+
+/* -------------------------
+   CARDS DE NOTAS (DARK)
+------------------------- */
+#conte {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.nota-card {
+    background: #252629;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.45);
+    border-left: 5px solid var(--colorCat);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: fadeIn 0.25s ease-out;
+}
+
+.nota-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+}
+
+.categoria {
+    font-size: .75rem;
+    background: var(--colorCat);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+.nota-card h3 {
+    color: #fafafa;
+}
+
+.nota-card p {
+    color: #d4d4d4;
+}
+
+/* -------------------------
+   ANIMACIÓN
+------------------------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------------
+   COLORES POR CATEGORÍA
+------------------------- */
+.cat-FINANZAS       { --colorCat: #4CAF50; }
+.cat-EVENTOS_SOCIAL { --colorCat: #FF9800; }
+.cat-ESTUDIOS       { --colorCat: #7f63d7; }
+.cat-ESTUDIOS_TAREAS { --colorCat: #3F51B5; }
+.cat-SALUD          { --colorCat: #E91E63; }
+.cat-COMPRAS        { --colorCat: #00bfa5; }
+.cat-TECNOLOGIA     { --colorCat: #2196F3; }
+.cat-HOGAR          { --colorCat: #8BC34A; }
+.cat-VIAJES         { --colorCat: #03A9F4; }
+.cat-MASCOTAS       { --colorCat: #A1887F; }
+.cat-DEPORTES_EJERCICIO { --colorCat: #FF5722; }
+.cat-ALIMENTACION   { --colorCat: #9C27B0; }
+.cat-CREATIVIDAD_IDEAS { --colorCat: #26c6da; }
+.cat-PERSONAL       { --colorCat: #90A4AE; }
+.cat-TRABAJO_PROFESIONAL { --colorCat: #0D47A1; }
+
+[class^="cat-"] {
+    --colorCat: #5aa2ff;
+}
