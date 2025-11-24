@@ -1,61 +1,191 @@
-/* -------------------------
-   BASE DARK MINIMALISTA
-------------------------- */
-body {
-    background: #1e1f22;
-    color: #e7e7e7;
-    padding: 40px 0;
-    font-family: "Inter", sans-serif;
+/* -----------------------------------------------------
+   🌙 ESTILO GENERAL – DARK THEME PROFESIONAL
+----------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* -------------------------
-   HEADER
-------------------------- */
+body {
+    background: #1d1e21;
+    color: #e7e7e7;
+    font-family: "Inter", Arial, sans-serif;
+    padding: 30px 12px;
+    line-height: 1.5;
+}
+
+/* Contenedores principales */
+section {
+    margin-bottom: 40px;
+}
+
+/* -----------------------------------------------------
+   HEADER + NAV
+----------------------------------------------------- */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
 header h1 {
     color: #ffffff;
-    font-weight: 600;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
 }
 
-/* -------------------------
-   FORMULARIO
-------------------------- */
+/* Navbar */
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.navbar a {
+    color: #cfcfcf;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: 0.3s ease;
+}
+
+.navbar a:hover {
+    background: #2a2c30;
+    color: #fff;
+}
+
+/* Botón modo oscuro (la lógica la pones tú en JS) */
+.switch-tema {
+    margin-top: 18px;
+    background: #2a2c30;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.switch-tema:hover {
+    background: #35363a;
+}
+
+/* -----------------------------------------------------
+   FORMULARIO DE CREAR NOTA
+----------------------------------------------------- */
 .formulario-seccion {
     background: #2a2c30;
     padding: 30px;
     border-radius: 14px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    border: 1px solid #000;
+    max-width: 700px;
+    margin: auto;
 }
 
+.formulario-seccion h2 {
+    margin-bottom: 15px;
+}
+
+/* Etiquetas */
 label {
     color: #cfcfcf;
 }
 
+/* Inputs */
 input[type="text"],
-textarea {
+textarea,
+select {
+    width: 100%;
     background: #1f2023;
     color: #eee;
     border: 1px solid #3b3c3f;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: 0.2s ease;
 }
 
-input[type="text"]:focus,
-textarea:focus {
+textarea {
+    height: 150px;
+    resize: none;
+}
+
+/* Focus */
+input:focus,
+textarea:focus,
+select:focus {
     border-color: #5aa2ff;
     box-shadow: 0 0 0 2px rgba(90,162,255,0.3);
+    outline: none;
 }
 
+/* Botón enviar */
 input[type="submit"] {
+    width: 100%;
     background: #5aa2ff;
+    padding: 14px;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: 0.25s ease;
+    font-size: 1rem;
 }
 
 input[type="submit"]:hover {
     background: #4a8fe0;
 }
 
-/* -------------------------
-   RESULTADOS
-------------------------- */
+/* Contador de caracteres */
+#contador {
+    font-size: 0.8rem;
+    color: #9da0a4;
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Indicador de análisis */
+#analizando {
+    margin-top: 10px;
+    padding: 10px;
+    background: #1f2023;
+    border-left: 4px solid #5aa2ff;
+    border-radius: 6px;
+}
+
+.oculto {
+    display: none !important;
+}
+
+/* -----------------------------------------------------
+   BUSCADOR
+----------------------------------------------------- */
+.buscar-input {
+    background: #232427;
+    border: 1px solid #37383b;
+    border-radius: 8px;
+    padding: 12px;
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: auto;
+    color: #eee;
+}
+
+.buscar-input:focus {
+    border-color: #5aa2ff;
+}
+
+/* -----------------------------------------------------
+   RESULTADOS + CARDS
+----------------------------------------------------- */
 #resultados {
     background: #2a2c30;
     padding: 30px;
@@ -63,20 +193,15 @@ input[type="submit"]:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
-#conte {
-    background: none;
-    border: none;
-}
-
-/* -------------------------
-   CARDS DE NOTAS (DARK)
-------------------------- */
+/* Grid de notas */
 #conte {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
+    margin-top: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 }
 
+/* Card base */
 .nota-card {
     background: #252629;
     padding: 18px;
@@ -87,54 +212,97 @@ input[type="submit"]:hover {
     animation: fadeIn 0.25s ease-out;
 }
 
+/* Hover */
 .nota-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 16px rgba(0,0,0,0.6);
 }
 
+/* Categoría */
 .categoria {
-    font-size: .75rem;
+    font-size: 0.75rem;
     background: var(--colorCat);
     color: #fff;
-    padding: 5px 10px;
+    padding: 4px 10px;
     border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 8px;
 }
 
 .nota-card h3 {
     color: #fafafa;
+    margin-bottom: 8px;
 }
 
+/* Texto */
 .nota-card p {
     color: #d4d4d4;
+    font-size: 0.93rem;
 }
 
-/* -------------------------
-   ANIMACIÓN
-------------------------- */
+/* -----------------------------------------------------
+   LOADER
+----------------------------------------------------- */
+.loader {
+    width: 45px;
+    height: 45px;
+    border: 5px solid #333;
+    border-top-color: #5aa2ff;
+    border-radius: 50%;
+    margin: auto;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* -----------------------------------------------------
+   ANIMACIÓN APARICIÓN
+----------------------------------------------------- */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* -------------------------
-   COLORES POR CATEGORÍA
-------------------------- */
-.cat-FINANZAS       { --colorCat: #4CAF50; }
-.cat-EVENTOS_SOCIAL { --colorCat: #FF9800; }
-.cat-ESTUDIOS       { --colorCat: #7f63d7; }
-.cat-ESTUDIOS_TAREAS { --colorCat: #3F51B5; }
-.cat-SALUD          { --colorCat: #E91E63; }
-.cat-COMPRAS        { --colorCat: #00bfa5; }
-.cat-TECNOLOGIA     { --colorCat: #2196F3; }
-.cat-HOGAR          { --colorCat: #8BC34A; }
-.cat-VIAJES         { --colorCat: #03A9F4; }
-.cat-MASCOTAS       { --colorCat: #A1887F; }
-.cat-DEPORTES_EJERCICIO { --colorCat: #FF5722; }
-.cat-ALIMENTACION   { --colorCat: #9C27B0; }
-.cat-CREATIVIDAD_IDEAS { --colorCat: #26c6da; }
-.cat-PERSONAL       { --colorCat: #90A4AE; }
-.cat-TRABAJO_PROFESIONAL { --colorCat: #0D47A1; }
+/* -----------------------------------------------------
+   TARJETAS – COLORES POR CATEGORÍA
+----------------------------------------------------- */
+.cat-FINANZAS               { --colorCat: #4CAF50; }
+.cat-EVENTOS_SOCIAL         { --colorCat: #FF9800; }
+.cat-ESTUDIOS               { --colorCat: #7f63d7; }
+.cat-ESTUDIOS_TAREAS        { --colorCat: #3F51B5; }
+.cat-SALUD                  { --colorCat: #E91E63; }
+.cat-COMPRAS                { --colorCat: #00bfa5; }
+.cat-TECNOLOGIA             { --colorCat: #2196F3; }
+.cat-HOGAR                  { --colorCat: #8BC34A; }
+.cat-VIAJES                 { --colorCat: #03A9F4; }
+.cat-MASCOTAS               { --colorCat: #A1887F; }
+.cat-DEPORTES_EJERCICIO     { --colorCat: #FF5722; }
+.cat-ALIMENTACION           { --colorCat: #9C27B0; }
+.cat-CREATIVIDAD_IDEAS      { --colorCat: #26c6da; }
+.cat-PERSONAL               { --colorCat: #90A4AE; }
+.cat-TRABAJO_PROFESIONAL    { --colorCat: #0D47A1; }
 
+/* Default */
 [class^="cat-"] {
     --colorCat: #5aa2ff;
+}
+
+/* -----------------------------------------------------
+   FOOTER
+----------------------------------------------------- */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #bbbbbb;
+}
+
+footer a {
+    color: #5aa2ff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
