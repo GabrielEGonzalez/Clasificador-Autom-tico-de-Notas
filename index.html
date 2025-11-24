@@ -4,47 +4,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicación de Contenido</title>
+    <title>Clasificador Automático de Notas</title>
+
+    <!-- Tu hoja de estilos -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Sweetalert2 para alertas -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 
 <body>
+
+    <!-- ================================
+         HEADER + NAVBAR
+    ==================================== -->
     <header>
-        <h1>Clasificador Automatico De Notas</h1>
+        <h1>Clasificador Automático De Notas</h1>
+
+        <nav class="navbar">
+            <!-- Agrega más links si necesitas más módulos -->
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#crear">Crear Nota</a></li>
+                <li><a href="#resultados">Notas</a></li>
+                <li><a href="#estadisticas">Estadísticas</a></li>
+            </ul>
+        </nav>
+
+        <!-- Botón para implementar modo oscuro -->
+        <button id="toggleMode" class="switch-tema">🌙 Modo Oscuro</button>
     </header>
 
+
+    <!-- ================================
+         FORMULARIO DE CREACIÓN DE NOTA
+    ==================================== -->
     <main>
-        <section class="formulario-seccion">
+
+        <section id="crear" class="formulario-seccion">
             <h2>Crear Nueva Entrada</h2>
+
+            <!-- Formulario que enviarás por fetch al backend -->
             <form id="miContenido">
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" required placeholder="Título de la entrada">
 
-                <label for="contenido">Contenido:</label>
-                <textarea name="contenido" id="contenido" required
-                    placeholder="Escribe el cuerpo del texto aquí..."></textarea>
+                <div>
+                    <label for="titulo">Título:</label><br>
+                    <input type="text" id="titulo" name="titulo" required placeholder="Título de la entrada">
+                </div>
 
-                <input type="submit" value="Enviar">
+                <div>
+                    <label for="contenido">Contenido:</label><br>
+                    <textarea name="contenido" id="contenido" required
+                        placeholder="Escribe el cuerpo del texto aquí..."></textarea>
+
+                    <!-- Contador de caracteres (lo llenas con JS) -->
+                    <p id="contador">0 / 5000 caracteres</p>
+                </div>
+
+                <!-- Categoría manual opcional (puedes llenarlo dinámicamente desde PHP o JS) -->
+                <div>
+                    <label for="categoriaManual">Categoría (opcional):</label><br>
+                    <select id="categoriaManual" name="categoriaManual">
+                        <option value="">Automática</option>
+                        <!-- Puedes rellenar más opciones desde API -->
+                        <option value="finanzas">Finanzas</option>
+                        <option value="estudios">Estudios</option>
+                        <option value="salud">Salud</option>
+                    </select>
+                </div>
+
+                <div>
+                    <input type="submit" value="Enviar">
+                </div>
+
             </form>
+
+            <!-- Indicador de análisis (lo activas con JS antes de enviar) -->
+            <div id="analizando" class="oculto">
+                <p>🔍 Analizando contenido y detectando categoría...</p>
+            </div>
         </section>
 
-        <hr>
-        <section id="resultados">
-            <h2>notas clasificadas</h2>
 
+        <hr>
+
+
+        <!-- ================================
+             BUSCADOR DE NOTAS
+        ==================================== -->
+        <section>
+            <h2>Buscar notas</h2>
+
+            <!-- Input para filtrar notas existentes -->
+            <input type="text" id="buscar" placeholder="Buscar notas..." class="buscar-input">
+        </section>
+
+
+        <!-- ================================
+             SECCIÓN DE NOTAS
+        ==================================== -->
+        <section id="resultados">
+            <h2>Notas clasificadas</h2>
+
+            <!-- Botón para refrescar manualmente las notas -->
+            <button id="refrescarNotas" class="btn-secundario">🔄 Actualizar Notas</button>
+
+            <!-- Loader que se muestra mientras cargas las notas -->
+            <div id="loader" class="loader oculto"></div>
+
+            <!-- Contenedor donde vas a insertar notas usando JS -->
             <div id="conte">
                 Cargando datos...
             </div>
         </section>
+
+
+        <hr>
+
+
+        <!-- ================================
+             ESTADÍSTICAS DEL SISTEMA
+        ==================================== -->
+        <section id="estadisticas" class="estadisticas">
+            <h2>Resumen del Sistema</h2>
+
+            <!-- Valores que llenarás desde la API -->
+            <ul>
+                <li>Total de notas: <span id="totalNotas">0</span></li>
+                <li>Categoría más usada: <span id="catPopular">---</span></li>
+                <li>Última nota registrada: <span id="ultimaNota">---</span></li>
+            </ul>
+        </section>
+
     </main>
 
+
+    <!-- ================================
+         FOOTER
+    ==================================== -->
     <footer>
-        <p><small>&copy; 2025 clasificacion de notas.</small></p>
+        <p>
+            &copy; 2025 Clasificador Automático de Notas ·
+            <a href="https://github.com/TU_REPOSITORIO" target="_blank">GitHub</a>
+        </p>
     </footer>
 
-    
+
+    <!-- Sweetalert2 script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Tu archivo JS (interacción, API, fetch, etc.) -->
     <script src="extraerData.js"></script>
 </body>
 
