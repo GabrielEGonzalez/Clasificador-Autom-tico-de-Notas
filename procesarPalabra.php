@@ -73,8 +73,3 @@ function buscarPalabra(string $cadena, array $mapa_palabras):string{
 
     return "sin categoria";
 }
-
-function extraerCategoria(){
-    
-    return "";
-}
