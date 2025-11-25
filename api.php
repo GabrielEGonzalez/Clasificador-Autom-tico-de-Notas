@@ -1,6 +1,6 @@
 <?php
 
-header('location: application/json');
+header('Content-Type: application/json');
 
 
 $mapa_categorias = [
@@ -23,14 +23,20 @@ $mapa_categorias = [
 
 $metodo = $_SERVER['REQUEST_METHOD'];
 
-match ($metodo) {
-    "POST" => function () {
+switch ($metodo) {
+    case "POST":
+        http_response_code(201);
+        break;
 
-        },
-    "GET" => function () {
+    case "GET":
+        echo json_encode(["catPopular"=>obtenerMAXCategoria($mapa_categorias), "totalNotas"=>obtenerCategoria(), "ultimaNota"=>obtenerUltimaNotas()]);
+        break;
 
-        },
-};
+    default:
+        http_response_code(405); 
+        echo json_encode(["error" => "Method not supported"]);
+        break;
+}
 
 function lecturaJSON()
 {
@@ -38,7 +44,34 @@ function lecturaJSON()
     return json_decode($listaNotas, true);
 }
 
-function obtenerMAXCategoria()
+function obtenerMAXCategoria(array $mapa_categorias)
+{   
+    $listaNotasJSON = lecturaJSON();
+    $max = "";
+    $maxCount = 0;
+    foreach ($mapa_categorias as $categoria) {
+        $count = 0;
+        foreach ($listaNotasJSON as $nota) {
+            if ($nota['categoria'] === $categoria) {
+                $count++;
+            }
+        }
+        if ($count > $maxCount) {
+            $maxCount = $count;
+            $max = $categoria;
+        }
+    }       
+    return $max;
+}
+function obtenerCategoria()
 {
+    // Implementación pendiente
+    $list = lecturaJSON(); 
+    return count($list);
+}
 
+function obtenerUltimaNotas()
+{
+    $list = lecturaJSON(); 
+    return end($list);
 }
