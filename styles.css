@@ -77,6 +77,7 @@ header h1 {
    FORMULARIO DE CREAR NOTA
 ----------------------------------------------------- */
 .formulario-seccion {
+    display: none;
     background: #2a2c30;
     padding: 30px;
     border-radius: 14px;
@@ -84,6 +85,7 @@ header h1 {
     border: 1px solid #000;
     max-width: 700px;
     margin: auto;
+    margin-bottom: 10px;
 }
 
 .formulario-seccion h2 {
@@ -252,7 +254,34 @@ input[type="submit"]:hover {
     margin: auto;
     animation: spin 0.7s linear infinite;
 }
-
+.estadisticas{
+    padding: 10px 20px;
+    text-align: center;
+}
+hr{
+    background-color: #03A9F4;
+    box-shadow: 0 0 10px #00bfa5;
+}
+.estadisticas ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: justify;
+    font-weight: 500;
+    gap: 20px;
+}
+.estadisticas li{
+    list-style: none;
+    text-align: center;
+    width: 220px;
+    height: 100px;
+    padding: 20px;
+    border: 1px solid #03A9F4;
+    box-shadow: 0 0 4px #0D47A1;
+}
+span{
+    color: rgb(117, 117, 117);
+}
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
