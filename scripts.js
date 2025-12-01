@@ -31,3 +31,12 @@ function extraerInfo(totalNotas, catPopular,ultimaNota){
     )
 }
 
+document.getElementById("toggleCreateNote").addEventListener("click",()=>{
+    let form = document.getElementById("crear");
+    form.style.display = "block";
+})
+
+document.getElementById("toggleCerrarNota").addEventListener("click", () => { 
+    let form = document.getElementById("crear");
+    form.style.display = "none";
+})
